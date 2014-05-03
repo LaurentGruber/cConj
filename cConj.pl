@@ -27,20 +27,20 @@ my $mots = "";
 my $phrase = "";
 my $texte ="";
 
-print @lignes;
-print "\n";
+#print @lignes;
+#print "\n";
 
 foreach my $ligne (@lignes) {
     my @exp = split (/\t/, $ligne);
-    if ( @exp[1] ne "SENT") {
-        if (@exp[1] eq "PUN" or $mots eq ""){
-            $mots .= @exp[0];
+    if ( $exp[1] ne "SENT") {
+        if ($exp[1] eq "PUN" or $mots eq ""){
+            $mots .= $exp[0];
         }
-        elsif (@exp[1] =~ /^VER:/){
-            $mots .= " [".@exp[2]."]";
+        elsif ($exp[1] =~ /^VER:/){
+            $mots .= " [".$exp[2]."]";
         }
         else {
-		    $mots .= " ".@exp[0];
+		    $mots .= " ".$exp[0];
         }
     }
     else {
