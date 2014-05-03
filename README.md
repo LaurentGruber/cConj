@@ -3,14 +3,15 @@ cConj
 
 Création d'exercice de conjugaison à partir d'un texte (epub)
 
-DEPENDENCIES
+Dependencies
 ============
 
 TreeTagger : http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/
 
-PERL MODULES DEPENDENCIES
+Perl modules dependencies
 =========================
 
 IPC::Run3
+
 Config::General
 
