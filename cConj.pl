@@ -3,17 +3,17 @@
 use strict;
 use warnings;
 use IPC::Run3;
-use Config::General;
+use YAML::XS qw/LoadFile/;
 
 #Récupère la configuration
-my $conf = Config::General->new("config.conf");
-my %config = $conf->getall;
+my $conf = LoadFile('config.yml');
+my $TreeTaggerBin = $conf->{TreeTagger};
 
 my $file = $ARGV[0];
 
 open ( my $in , '<', $file) or die( "Impossible d'ouvrir $file");
 
-my @cmd = $config{"TreeTagger"};
+my @cmd = $TreeTaggerBin;
 
 my $out;
 
