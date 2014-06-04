@@ -1,7 +1,7 @@
 cConj
 =====
 
-Création d'exercice de conjugaison à partir d'un texte (epub)
+Création d'exercice de conjugaison à partir d'un fichier texte
 
 Dependencies
 ============
@@ -13,5 +13,9 @@ Perl modules dependencies
 
 IPC::Run3
 
-Config::General
+YAML::XS
 
+Usage
+=====
+
+cConj.pl PathToTextFile

@@ -1,0 +1,4 @@
+---
+TaggerBin : 'tree-tagger/cmd/tree-tagger-french-utf8'
+TaggerSeparator : \t
+TagFile : 'config/frTTtag.yml'
