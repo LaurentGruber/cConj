@@ -5,8 +5,14 @@ TaggerSeparator : \t
 TagFile : 'config/frTTtag.yml'
 
 #Database
-db : 'cConj'
+#db : 'cConj'
+#serveur : 'localhost'
+#login : 'cconj'
+#pass : 'cconj'
+#port : ''
+claco : 1
+db : 'claroline_prod'
 serveur : 'localhost'
-login : 'cconj'
-pass : 'cconj'
+login : 'claco'
+pass : 'laurent'
 port : ''
