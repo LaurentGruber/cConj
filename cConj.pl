@@ -67,15 +67,20 @@ foreach my $ligne (@lignes) {
             $mots .= $exp[0];
         }
         elsif ($exp[1] =~ /^VER:/){
-            $nbVerbePhrase++ ;
-            chomp($exp[1]);
-            $verbe .= $exp[2].",";
-            $temps .= $Tag->{Verbe}->{$exp[1]}.",";
-            $reponse .= $exp[0].",";
-            if ($claco == 1){
-                $mots .= qq( <input id="1" class="blank" name="blank_1" size="25" type="text" value="[REPONSE]" /> [$exp[2] - $Tag->{Verbe}->{$exp[1]}] );
+            if ($Tag->{Verbe}->{$exp[1]} =~ /^subjonctif/){
+                $mots .= " ".$exp[0];
             }
-            else{ $mots .= " [Verbe] ";}
+            else {
+                $nbVerbePhrase++ ;
+                chomp($exp[1]);
+                $verbe .= $exp[2].",";
+                $temps .= $Tag->{Verbe}->{$exp[1]}.",";
+                $reponse .= $exp[0].",";
+                if ($claco == 1){
+                    $mots .= qq( <input id="1" class="blank" name="blank_1" size="25" type="text" value="[REPONSE]" /> [$exp[2] - $Tag->{Verbe}->{$exp[1]}] );
+                }
+                else{ $mots .= " [Verbe] ";}
+            }
 
         }
         else {
