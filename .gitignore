@@ -1,2 +1,4 @@
 test
 tree-tagger
+config/config.yml.*
+config/config.yml

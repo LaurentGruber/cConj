@@ -5,11 +5,11 @@ TaggerSeparator : \t
 TagFile : 'config/frTTtag.yml'
 
 #Intégration avec Claroline Connect (1 = oui 0 = non)
-claco : 0
+claco : 1
 
 #Database
-db : 'cConj'
+db : 'claroline_prod'
 serveur : 'localhost'
-login : 'cconj'
-pass : 'cconj'
+login : 'claco'
+pass : 'laurent'
 port : ''

@@ -9,6 +9,7 @@
 use strict;
 use warnings;
 use utf8;
+use Encode;
 use IPC::Run3;
 use YAML::XS qw/LoadFile/;
 use DBI;
@@ -34,7 +35,7 @@ $dbcon->do('set names utf8');
 my $Tag = LoadFile($TagFile);
 
 #Récupère l'exercice (Claco) auquel associer la question
-my $exerciceId = 1;
+my $exerciceId = 2;
 
 #Récupère le fichier passé en argument et l'ouvre
 my $file = $ARGV[0];
@@ -61,6 +62,7 @@ my $reponse;
 my $req;
 
 foreach my $ligne (@lignes) {
+    $ligne = Encode::decode('utf8', $ligne );
     my @exp = split (/$TaggerSeparator/, $ligne);
     if ( $exp[1] ne "SENT") {
         if ($exp[1] eq "PUN" or $mots eq ""){
@@ -77,7 +79,7 @@ foreach my $ligne (@lignes) {
                 $temps .= $Tag->{Verbe}->{$exp[1]}.",";
                 $reponse .= $exp[0].",";
                 if ($claco == 1){
-                    $mots .= qq( <input id="1" class="blank" name="blank_1" size="25" type="text" value="[REPONSE]" /> [$exp[2] - $Tag->{Verbe}->{$exp[1]}] );
+                    $mots .= qq( <input id="$nbVerbePhrase" class="blank" name="blank_$nbVerbePhrase" size="25" type="text" value="[REPONSE]" /> [$exp[2] - $Tag->{Verbe}->{$exp[1]}] );
                 }
                 else{ $mots .= " [Verbe] ";}
             }
