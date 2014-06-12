@@ -22,6 +22,18 @@ getopts( 'ct:e:', \%opts ) or print_usage();
 my $claco = 0;
 if ($opts{c}) { $claco = 1;}
 
+#Récupère l'exercice (Claco) auquel associer la question
+my $exerciceId = 1;
+if ($opts{e}){
+$exerciceId = $opts{e};
+}
+
+# Définit le titre
+my $titreTexte = "Un texte a trou";
+if ($opts{t}){
+$titreTexte = $opts{t};
+}
+
 #Récupère la configuration
 my $conf = LoadFile('config/config.yml');
 my $TaggerBin = $conf->{TaggerBin};
@@ -50,14 +62,16 @@ $dbcon->do('set names utf8');
 my $Tag = LoadFile($TagFile);
 
 
-#Récupère l'exercice (Claco) auquel associer la question
-my $exerciceId = 2;
 
 #Récupère le fichier passé en argument et l'ouvre
-my $file = $ARGV[0];
+my $file ="";
+if ($ARGV[0]){
+    $file = $ARGV[0];
+}
+else {print_usage();}
+
 open ( my $in , '<', $file) or die( "Impossible d'ouvrir $file");
 
-my $titreTexte = $ARGV[1];
 
 #Fait passer le Tagger sur le fichier
 my @cmd = $TaggerBin;
@@ -155,4 +169,16 @@ foreach my $ligne (@lignes) {
     }
 
 #$dbcon->disconnect();
+}
+
+#### Affiche les informations d'utilisation du script #######
+
+sub print_usage {
+
+    print "Utilisation : cConj [OPTION]... FICHIER\n";
+    print "OPTIONS : \n";
+    print "-c : insérer dans la base de Claroline Connect\n";
+    print "-e int : avec comme int l'id de l'exercice Claroline Connect (1 par defaut)\n";
+    print "-t \"titre texte\" : définit le titre de la question\n";
+    exit;
 }
