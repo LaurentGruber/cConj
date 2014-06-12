@@ -10,21 +10,36 @@ use strict;
 use warnings;
 use utf8;
 use Encode;
+use Getopt::Std;
 use IPC::Run3;
 use YAML::XS qw/LoadFile/;
 use DBI;
+
+#Récupère les options
+my %opts;
+getopts( 'ct:e:', \%opts ) or print_usage();
+
+my $claco = 0;
+if ($opts{c}) { $claco = 1;}
 
 #Récupère la configuration
 my $conf = LoadFile('config/config.yml');
 my $TaggerBin = $conf->{TaggerBin};
 my $TaggerSeparator = $conf->{TaggerSeparator};
 my $TagFile = $conf->{TagFile};
-my $claco = $conf->{claco};
 my $db = $conf->{db};
 my $serveur = $conf->{serveur};
 my $login = $conf->{login};
 my $pass = $conf->{pass};
 my $port = $conf->{port};
+
+if ($claco == 1){
+$db = $conf->{dbClaco};
+$serveur = $conf->{serveurClaco};
+$login = $conf->{loginClaco};
+$pass = $conf->{passClaco};
+$port = $conf->{portClaco};
+}
 
 #Connect to SQLite database
 my $dbcon = DBI->connect("dbi:mysql:database=$db;host=$serveur;port=$port",$login,$pass) or die "Could not connect to db";
@@ -33,6 +48,7 @@ $dbcon->do('set names utf8');
 
 #Récupère la structure des tags
 my $Tag = LoadFile($TagFile);
+
 
 #Récupère l'exercice (Claco) auquel associer la question
 my $exerciceId = 2;

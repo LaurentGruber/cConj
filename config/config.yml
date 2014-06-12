@@ -4,12 +4,16 @@ TaggerBin : 'tree-tagger/cmd/tree-tagger-french-utf8'
 TaggerSeparator : \t
 TagFile : 'config/frTTtag.yml'
 
-#Intégration avec Claroline Connect (1 = oui 0 = non)
-claco : 1
-
 #Database
-db : 'claroline_prod'
+db : 'cConj'
 serveur : 'localhost'
-login : 'claco'
-pass : 'laurent'
+login : 'cconj'
+pass : 'cconj'
 port : ''
+
+#Database de Claroline Connect
+dbClaco : 'claroline_prod'
+serveurClaco : 'localhost'
+loginClaco : 'claco'
+passClaco : 'laurent'
+portClaco : ''
